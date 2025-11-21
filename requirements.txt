@@ -1,0 +1,33 @@
+# Core Data Science
+numpy
+pandas
+scikit-learn
+
+# Time Series Analysis
+statsmodels
+
+# Deep Learning
+torch
+
+# Dashboard & Visualization
+streamlit
+plotly
+matplotlib
+seaborn
+
+# Machine Learning (Optional - Anomaly Detection)
+lightgbm
+
+# Utilities
+pyyaml
+tqdm
+
+# GPU Acceleration (Optional - SARIMA on GPU)
+# Uncomment if you have NVIDIA GPU and want to use cuML/cuDF
+# cudf-cu11
+# cuml-cu11
+# cupy-cuda11x
+# pynvml
+
+# Parallel Processing (Optional)
+joblib

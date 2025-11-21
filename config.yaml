@@ -1,0 +1,69 @@
+---
+#--- Column and country configurations ---
+columns:
+  load_pattern: "{cc}_load_actual_entsoe_transparency"
+  solar_pattern: "{cc}_solar_generation_actual"
+  timestamp: utc_timestamp
+  wind_pattern: "{cc}_wind_onshore_generation_actual"
+countries:
+  - DK
+  - FR
+  - ES
+
+#--- Paths ---
+data: data/
+data_path: data/time_series_60min_singleindex.csv
+output_dir: outputs/
+output_plots: outputs/plots/
+output_metrics: outputs/metrics/
+output_anomalies: outputs/anomalies/
+output_anomaly_ml: outputs/anomaly_ml/
+cleaned_files:
+  - data/DK_cleaned.csv
+  - data/FR_cleaned.csv
+  - data/ES_cleaned.csv
+
+#--- Model configurations ---
+arma:
+  p_range: [0, 1, 2]
+  q_range: [0, 1, 2]
+
+arma_best:
+  p: 2
+  q: 2
+
+arima:
+  d: 1
+  p_range: [0, 1, 2]
+  q_range: [0, 1, 2]
+
+arima_best:
+  p: 2
+  d: 1
+  q: 2
+
+sarima:
+  d: 1
+  D: 1
+  s: 168
+  p_range: [0, 1, 2]
+  q_range: [0, 1, 2]
+  P_range: [0, 1]
+  Q_range: [0, 1]
+
+sarima_best:
+  p: 2
+  d: 1
+  q: 2
+  P: 1
+  D: 1
+  Q: 1
+  s: 168
+
+nn_input_window: 168
+horizon: 24
+batch_size: 128
+epochs: 30
+lr: 1e-3
+seed: 42
+exog_columns: ["solar", "wind"]

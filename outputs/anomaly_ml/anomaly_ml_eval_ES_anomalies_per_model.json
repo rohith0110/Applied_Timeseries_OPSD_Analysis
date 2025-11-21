@@ -1,0 +1,11 @@
+{
+  "country": "ES",
+  "file": "ES_anomalies_per_model.csv",
+  "metrics": {
+    "pr_auc": 0.0032288021495366923,
+    "f1_at_p0.8": 0.0,
+    "best_threshold": 0.5,
+    "f1": 0.0,
+    "precision": 0.0
+  }
+}

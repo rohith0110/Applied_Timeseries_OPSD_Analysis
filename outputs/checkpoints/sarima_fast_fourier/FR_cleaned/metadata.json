@@ -1,0 +1,17 @@
+{
+  "order": [
+    1,
+    1,
+    1
+  ],
+  "seasonal_order": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "fourier_k": 5,
+  "use_fourier_only": true,
+  "window_hours": 8760,
+  "integrity_sha256": "12d3771c1574a1da892d258fcbc2b26deb2d1ea82611b7331a8459abe8fb52a7"
+}

@@ -1,0 +1,11 @@
+{
+  "country": "ES",
+  "file": "ES_anomalies_ensemble.csv",
+  "metrics": {
+    "pr_auc": 0.6571164382450343,
+    "f1_at_p0.8": 0.7037037037037037,
+    "best_threshold": 0.24341415291781981,
+    "f1": 0.7037037037037037,
+    "precision": 0.8636363636363636
+  }
+}
