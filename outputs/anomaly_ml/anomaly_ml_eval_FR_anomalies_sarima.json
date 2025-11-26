@@ -2,10 +2,10 @@
   "country": "FR",
   "file": "FR_anomalies_sarima.csv",
   "metrics": {
-    "pr_auc": 0.4422475912086378,
-    "f1_at_p0.8": 0.0,
-    "best_threshold": 0.5,
-    "f1": 0.5517241379310345,
-    "precision": 0.4444444444444444
+    "pr_auc": 0.953038628038628,
+    "f1_at_p0.8": 0.9,
+    "best_threshold": 0.9999411369769299,
+    "f1": 0.9,
+    "precision": 1.0
   }
 }

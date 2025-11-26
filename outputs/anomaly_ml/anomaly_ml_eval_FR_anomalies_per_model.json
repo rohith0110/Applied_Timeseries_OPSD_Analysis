@@ -2,7 +2,7 @@
   "country": "FR",
   "file": "FR_anomalies_per_model.csv",
   "metrics": {
-    "pr_auc": 0.014339740711641694,
+    "pr_auc": 0.07575898263430542,
     "f1_at_p0.8": 0.0,
     "best_threshold": 0.5,
     "f1": 0.0,

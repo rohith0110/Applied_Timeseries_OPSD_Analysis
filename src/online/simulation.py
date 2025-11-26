@@ -17,7 +17,7 @@ from pathlib import Path
 from tqdm import tqdm
 from sklearn.preprocessing import StandardScaler
 
-from src.neural.neural_models import LSTMForecaster
+from src.neural.neural_models import LSTMEncoderDecoderAttention
 
 
 with open("config.yaml", "r") as f:
@@ -93,7 +93,7 @@ class OnlineSimulation:
     def setup_model(self):
         print("Initializing LSTM model...")
 
-        self.model = LSTMForecaster(
+        self.model = LSTMEncoderDecoderAttention(
             input_dim=1,
             exog_dim=0,
             hidden_size=128,

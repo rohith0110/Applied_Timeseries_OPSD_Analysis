@@ -2,10 +2,10 @@
   "country": "DK",
   "file": "DK_anomalies_ensemble.csv",
   "metrics": {
-    "pr_auc": 0.341895863313036,
-    "f1_at_p0.8": 0.2,
-    "best_threshold": 0.8367246230722581,
-    "f1": 0.2,
-    "precision": 1.0
+    "pr_auc": 0.9992791511283685,
+    "f1_at_p0.8": 0.9866666666666667,
+    "best_threshold": 0.5852797498390552,
+    "f1": 0.9866666666666667,
+    "precision": 0.9736842105263158
   }
 }

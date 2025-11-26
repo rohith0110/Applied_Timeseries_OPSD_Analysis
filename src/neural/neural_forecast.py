@@ -32,6 +32,7 @@ from .neural_models import (
     GRUForecaster,
     LSTMForecaster,
     BiLSTMForecaster,
+    LSTMEncoderDecoderAttention,
 )
 
 
@@ -135,7 +136,11 @@ def train_one(model, loader, opt, device, loss_fn):
         if xe is not None:
             xe = xe.to(device)
         opt.zero_grad()
-        pred = model(x, xe)
+        # Pass y_true for encoder-decoder models (teacher forcing)
+        if hasattr(model, "decoder"):  # Check if it's encoder-decoder
+            pred = model(x, xe, y_true=y)
+        else:
+            pred = model(x, xe)
         loss = loss_fn(pred, y)
         loss.backward()
         opt.step()
@@ -303,19 +308,35 @@ def run_experiment_for_country(csv_path, cfg, model_name, device):
             out_h=horizon,
             quantile_levels=quantile_levels,
         )
+    elif model_name.lower() == "lstm_attn" or model_name.lower() == "attention":
+        model = LSTMEncoderDecoderAttention(
+            input_dim=input_dim,
+            exog_dim=exog_dim,
+            hidden_size=256,
+            n_layers=2,
+            out_h=horizon,
+            teacher_forcing_ratio=0.5,
+            quantile_levels=quantile_levels,
+        )
     else:
         raise ValueError(f"Unknown model {model_name}")
 
-    device = (
-        device
-        if torch.cuda.is_available() and device == "cuda"
-        else torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    )
-    model = model.to(device)
+    # Set device (prefer GPU if available and requested)
+    if device == "cuda" and torch.cuda.is_available():
+        device_obj = torch.device("cuda")
+        print(f"Using GPU: {torch.cuda.get_device_name(0)}")
+    elif torch.cuda.is_available():
+        device_obj = torch.device("cuda")
+        print(f"Using GPU: {torch.cuda.get_device_name(0)}")
+    else:
+        device_obj = torch.device("cpu")
+        print("Using CPU")
+
+    model = model.to(device_obj)
 
     opt = torch.optim.Adam(model.parameters(), lr=lr)
     if use_quantiles:
-        loss_fn = QuantileLoss(quantile_levels).to(device)
+        loss_fn = QuantileLoss(quantile_levels).to(device_obj)
     else:
         loss_fn = nn.MSELoss()
 
@@ -325,8 +346,10 @@ def run_experiment_for_country(csv_path, cfg, model_name, device):
     cur_pat = 0
 
     for ep in range(epochs):
-        train_loss = train_one(model, train_loader, opt, device, loss_fn)
-        preds_dev, trues_dev, dev_loss = eval_one(model, dev_loader, device, loss_fn)
+        train_loss = train_one(model, train_loader, opt, device_obj, loss_fn)
+        preds_dev, trues_dev, dev_loss = eval_one(
+            model, dev_loader, device_obj, loss_fn
+        )
         print(
             f"[{Path(csv_path).stem}] {model_name} epoch {ep+1}/{epochs} train_loss={train_loss:.6f} dev_loss={dev_loss:.6f}"
         )
@@ -341,10 +364,10 @@ def run_experiment_for_country(csv_path, cfg, model_name, device):
                 break
 
     if best_state is not None:
-        model.load_state_dict({k: best_state[k].to(device) for k in best_state})
+        model.load_state_dict({k: best_state[k].to(device_obj) for k in best_state})
 
-    preds_dev, trues_dev, _ = eval_one(model, dev_loader, device, loss_fn)
-    preds_test, trues_test, _ = eval_one(model, test_loader, device, loss_fn)
+    preds_dev, trues_dev, _ = eval_one(model, dev_loader, device_obj, loss_fn)
+    preds_test, trues_test, _ = eval_one(model, test_loader, device_obj, loss_fn)
 
     if use_quantiles:
         preds_dev_point, preds_dev_lower, preds_dev_upper = extract_quantile_arrays(
@@ -459,7 +482,18 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="config.yaml")
     parser.add_argument(
-        "--model", default="gru", choices=["ann", "rnn", "gru", "lstm", "bilstm", "all"]
+        "--model",
+        default="gru",
+        choices=[
+            "ann",
+            "rnn",
+            "gru",
+            "lstm",
+            "bilstm",
+            "lstm_attn",
+            "attention",
+            "all",
+        ],
     )
     parser.add_argument(
         "--device", default="cuda" if torch.cuda.is_available() else "cpu"
@@ -470,7 +504,9 @@ if __name__ == "__main__":
         cfg = yaml.safe_load(f)
     print(f"Loaded config from {args.config}")
     models_to_run = (
-        ["ann", "rnn", "gru", "lstm", "bilstm"] if args.model == "all" else [args.model]
+        ["ann", "rnn", "gru", "lstm", "bilstm", "lstm_attn"]
+        if args.model == "all"
+        else [args.model]
     )
     print(f"Models to run: {models_to_run}")
     all_metrics = []

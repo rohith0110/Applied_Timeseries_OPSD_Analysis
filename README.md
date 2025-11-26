@@ -7,7 +7,7 @@ This project implements an end-to-end pipeline for forecasting energy prices (DK
 - `data/`: Contains cleaned CSV data files.
 - `src/`: Source code for the pipeline.
   - `classicmodels/`: ARIMA/SARIMA implementations.
-  - `neural/`: LSTM/GRU/RNN implementations.
+  - `neural/`: LSTM/GRU/RNN implementations + Encoder-Decoder with Attention.
   - `anomaly/`: Anomaly detection logic (ML-based).
   - `online/`: Real-time simulation and dashboard.
 - `outputs/`: Stores models, metrics, plots, and simulation results.
