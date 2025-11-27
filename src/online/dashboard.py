@@ -37,7 +37,7 @@ if res_df is None:
     st.stop()
 
 
-st.title(f"⚡ GridGuard Live Monitor: {country}")
+st.title(f"GridGuard Live Monitor: {country}")
 
 
 last_ts = res_df["timestamp"].iloc[-1]

@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FINAL_REPORT.md</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+
+    <style>
+      /* ==== GLOBAL DARK MODE ==== */
+      body {
+        background-color: #0f0f0f;
+        color: #e6e6e6;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Ubuntu",
+          "Droid Sans", sans-serif;
+        padding: 0 26px;
+        line-height: 1.6;
+      }
+
+      /* Links */
+      a {
+        color: #4ea1ff;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* Headings */
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: #ffffff;
+        border-color: #3a3a3a !important;
+      }
+
+      /* Horizontal rules */
+      hr {
+        border: none;
+        border-bottom: 2px solid #333;
+      }
+
+      /* Tables */
+      table {
+        border-collapse: collapse;
+      }
+      table > thead > tr > th {
+        color: #ffffff;
+        background: #1f1f1f;
+        border-bottom: 1px solid #555;
+      }
+      table > tbody > tr > td {
+        background: #151515;
+        border-top: 1px solid #333;
+      }
+      table > tbody > tr:nth-child(even) > td {
+        background: #181818;
+      }
+
+      /* Code blocks */
+      pre {
+        background-color: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 6px;
+        color: #e8e8e8;
+        padding: 16px;
+        overflow-x: auto;
+      }
+      code {
+        color: #ffd479;
+      }
+
+      /* Inline code */
+      :not(pre) > code {
+        background: #2a2a2a;
+        padding: 2px 4px;
+        border-radius: 4px;
+        color: #ffdd99;
+      }
+
+      /* Blockquote */
+      blockquote {
+        background: #1a1a1a;
+        border-left: 4px solid #4ea1ff;
+        padding: 10px 16px;
+        margin: 12px 0;
+      }
+
+      /* Images */
+      img {
+        max-width: 100%;
+        border-radius: 4px;
+      }
+
+      /* Mermaid Dark Mode */
+      .mermaid {
+        background: #1a1a1a !important;
+        color: #e6e6e6 !important;
+      }
+
+      /* Highlight.js Dark Theme Override */
+      .hljs {
+        background: #1a1a1a !important;
+        color: #e6e6e6 !important;
+      }
+      .hljs-comment {
+        color: #8b8b8b;
+      }
+      .hljs-string {
+        color: #9fdf9f;
+      }
+      .hljs-number {
+        color: #ffb366;
+      }
+      .hljs-keyword {
+        color: #c792ea;
+      }
+      .hljs-title {
+        color: #82aaff;
+      }
+      .hljs-attr {
+        color: #ffcb6b;
+      }
+    </style>
+
+    <style>
+      /* Tomorrow Theme */
+      /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+      /* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+      /* Tomorrow Comment */
+      .hljs-comment,
+      .hljs-quote {
+        color: #8e908c;
+      }
+
+      /* Tomorrow Red */
+      .hljs-variable,
+      .hljs-template-variable,
+      .hljs-tag,
+      .hljs-name,
+      .hljs-selector-id,
+      .hljs-selector-class,
+      .hljs-regexp,
+      .hljs-deletion {
+        color: #c82829;
+      }
+
+      /* Tomorrow Orange */
+      .hljs-number,
+      .hljs-built_in,
+      .hljs-builtin-name,
+      .hljs-literal,
+      .hljs-type,
+      .hljs-params,
+      .hljs-meta,
+      .hljs-link {
+        color: #f5871f;
+      }
+
+      /* Tomorrow Yellow */
+      .hljs-attribute {
+        color: #eab700;
+      }
+
+      /* Tomorrow Green */
+      .hljs-string,
+      .hljs-symbol,
+      .hljs-bullet,
+      .hljs-addition {
+        color: #718c00;
+      }
+
+      /* Tomorrow Blue */
+      .hljs-title,
+      .hljs-section {
+        color: #4271ae;
+      }
+
+      /* Tomorrow Purple */
+      .hljs-keyword,
+      .hljs-selector-tag {
+        color: #8959a8;
+      }
+
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        color: #4d4d4c;
+        padding: 0.5em;
+      }
+
+      .hljs-emphasis {
+        font-style: italic;
+      }
+
+      .hljs-strong {
+        font-weight: bold;
+      }
+    </style>
+
+    <style>
+      /*
+ * Markdown PDF CSS
+ */
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI",
+          "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+        padding: 0 12px;
+      }
+
+      pre {
+        background-color: #f8f8f8;
+        border: 1px solid #cccccc;
+        border-radius: 3px;
+        overflow-x: auto;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+      }
+
+      pre:not(.hljs) {
+        padding: 23px;
+        line-height: 19px;
+      }
+
+      blockquote {
+        background: rgba(127, 127, 127, 0.1);
+        border-color: rgba(0, 122, 204, 0.5);
+      }
+
+      .emoji {
+        height: 1.4em;
+      }
+
+      code {
+        font-size: 14px;
+        line-height: 19px;
+      }
+
+      /* for inline code */
+      :not(pre):not(.hljs) > code {
+        color: #c9ae75; /* Change the old color so it seems less like an error */
+        font-size: inherit;
+      }
+
+      /* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+      .page {
+        page-break-after: always;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="file:///d%3A//Tools//mdstyle//style.css"
+      type="text/css"
+    />
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+  </head>
+  <body>
+    <script>
+      mermaid.initialize({
+        startOnLoad: true,
+        theme:
+          document.body.classList.contains("vscode-dark") ||
+          document.body.classList.contains("vscode-high-contrast")
+            ? "dark"
+            : "default",
+      });
+    </script>
+    <h1 id="energy-load-forecasting--anomaly-detection-opsd-analysis">
+      Energy Load Forecasting &amp; Anomaly Detection: OPSD Analysis
+    </h1>
+    <p>
+      <strong>Project</strong>: G_034_027_030<br />
+      <strong>Countries Analyzed</strong>: Denmark (DK), Spain (ES), France
+      (FR)<br />
+      <strong>Dataset</strong>: Open Power System Data (OPSD)
+    </p>
+    <hr />
+    <h2 id="1-data-exploration--stl-decomposition">
+      1. Data Exploration &amp; STL Decomposition
+    </h2>
+    <h3 id="11-dataset-overview">1.1 Dataset Overview</h3>
+    <p>
+      The analysis uses hourly energy Load data from three European countries
+      with exogenous features:
+    </p>
+    <ul>
+      <li>
+        <strong>Target Variable</strong>: Load (actual energy consumption in MW)
+      </li>
+      <li>
+        <strong>Exogenous Features</strong>: Solar generation, Wind generation
+      </li>
+      <li><strong>Frequency</strong>: Hourly (1h)</li>
+      <li><strong>Data Split</strong>: 80% train / 10% dev / 10% test</li>
+    </ul>
+    <p><strong>Country-Specific Characteristics</strong>:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>Load Range (MW)</th>
+          <th>Seasonality Pattern</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Denmark (DK)</strong></td>
+          <td>2,400 - 5,300</td>
+          <td>Weekly (s=168) with strong daily cycles</td>
+        </tr>
+        <tr>
+          <td><strong>Spain (ES)</strong></td>
+          <td>20,000 - 44,000</td>
+          <td>Weekly (s=168) with pronounced peaks</td>
+        </tr>
+        <tr>
+          <td><strong>France (FR)</strong></td>
+          <td>40,000 - 95,000</td>
+          <td>Weekly (s=168) with consistent rhythm</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="12-stl-decomposition-analysis">1.2 STL Decomposition Analysis</h3>
+    <p>
+      <strong>STL (Seasonal and Trend decomposition using Loess)</strong> was
+      applied to decompose each time series into:
+    </p>
+    <ul>
+      <li><strong>Trend</strong>: Long-term movement</li>
+      <li>
+        <strong>Seasonal</strong>: Repeating weekly patterns (period = 168
+        hours)
+      </li>
+      <li><strong>Residual</strong>: Irregular fluctuations</li>
+    </ul>
+    <p>
+      <img
+        src="outputs/plots/stl_acf/DK/DK_cleaned_STL_60.png"
+        alt="Denmark STL Decomposition"
+      />
+      <img
+        src="outputs/plots/stl_acf/ES/ES_cleaned_STL_60.png"
+        alt="Spain STL Decomposition"
+      />
+      <img
+        src="outputs/plots/stl_acf/FR/FR_cleaned_STL_60.png"
+        alt="France STL Decomposition"
+      />
+    </p>
+    <p><strong>Key Takeaways</strong>:</p>
+    <ol>
+      <li>
+        <p>
+          <strong>Weekly Seasonality Dominance</strong>: All three countries
+          exhibit strong 24 and 168-hour (7-day) seasonal patterns, reflecting
+          daily and work-week vs. weekend consumption differences. This
+          justified the selection of <strong>s=168</strong> for SARIMA models.
+        </p>
+      </li>
+      <li>
+        <p><strong>Trend Stability</strong>:</p>
+        <ul>
+          <li>
+            <strong>DK</strong>: There is a clear downward trend from January to
+            june possibly because of the winter to summer transition reducing
+            heating demand.Then there is a clear Upward trend from july to
+            december possibly because of the summer to winter transition
+            increasing heating demand.
+          </li>
+          <li>
+            <strong>ES</strong>: Clear peak in the winter months likely because
+            of heating demand and a trough after about march then again an
+            increase in summer months likely because of cooling demand.
+          </li>
+          <li>
+            <strong>FR</strong>: The peak in January is likely due to higher
+            heating demand during winter, while the trough in summer reflects
+            reduced heating needs and minimal cooling demand, as Spain generally
+            experiences moderately warm summers.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Residual Behavior</strong>:</p>
+        <ul>
+          <li>
+            <strong>DK</strong>: Moderate residual variance with a clear
+            seasonal pattern missed by STL, confirmed by ACF spikes at lag 168.
+          </li>
+          <li>
+            <strong>ES</strong>: Large residual variance with a clear seasonal
+            pattern missed by STL, confirmed by ACF spikes at lag 168.
+          </li>
+          <li>
+            <strong>FR</strong>: Large residual variance with a clear seasonal
+            pattern missed by STL, confirmed by ACF spikes at lag 168.
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>
+          <strong>ACF Analysis Confirmed s=168</strong>: Autocorrelation
+          function plots showed <strong>huge spikes at lag 168</strong> in
+          residuals after differencing, confirming weekly seasonality and
+          validating the choice of seasonal period s=168 for SARIMA models.
+        </p>
+      </li>
+    </ol>
+    <hr />
+    <h2 id="2-order-selection-for-classical-models-armaarimasarima">
+      2. Order Selection for Classical Models (ARMA/ARIMA/SARIMA)
+    </h2>
+    <h3 id="21-methodology">2.1 Methodology</h3>
+    <p>
+      Grid search was performed over multiple order combinations with evaluation
+      based on:
+    </p>
+    <ul>
+      <li>
+        <strong>Akaike Information Criterion (AIC)</strong>: Penalizes model
+        complexity
+      </li>
+      <li>
+        <strong>Bayesian Information Criterion (BIC)</strong>: Stronger penalty
+        than AIC for additional parameters
+      </li>
+    </ul>
+    <p><strong>Search Ranges</strong>:</p>
+    <ul>
+      <li>ARMA: p ∈ {0,1,2}, q ∈ {0,1,2}</li>
+      <li>ARIMA: p ∈ {0,1,2}, d=1, q ∈ {0,1,2}</li>
+      <li>
+        SARIMA: p ∈ {0,1,2}, d=1, q ∈ {0,1,2}, P ∈ {0,1}, D=1, Q ∈ {0,1},
+        <strong>s=168</strong>
+      </li>
+    </ul>
+    <h3 id="22-acfpacf-insights">2.2 ACF/PACF Insights</h3>
+    <p>
+      <img
+        src="outputs/plots/stl_acf/DK/DK_cleaned_ACF_Residuals.png"
+        alt="Denmark ACF Residuals"
+      />
+      <img
+        src="outputs/plots/stl_acf/ES/ES_cleaned_ACF_Residuals.png"
+        alt="Spain ACF Residuals"
+      />
+      <img
+        src="outputs/plots/stl_acf/FR/FR_cleaned_ACF_Residuals.png"
+        alt="France ACF Residuals"
+      />
+    </p>
+    <p>The ACF plots of residuals after first differencing revealed:</p>
+    <ul>
+      <li>
+        <strong>Massive spike at lag 168</strong>: Confirmed weekly seasonality,
+        necessitating seasonal differencing (D=1) with s=168
+      </li>
+      <li>
+        <strong>Exponential decay in early lags</strong>: Suggested MA
+        components (q &gt; 0)
+      </li>
+      <li>
+        <strong>Cutoff patterns</strong>: Indicated AR components (p &gt; 0)
+      </li>
+    </ul>
+    <h3 id="23-top-5-models-by-aicbic">2.3 Top-5 Models by AIC/BIC</h3>
+    <h4 id="denmark-dk---sarima-grid-search-results">
+      Denmark (DK) - SARIMA Grid Search Results
+    </h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Order (p,d,q)<a href="s">P,D,Q</a></th>
+          <th>AIC</th>
+          <th>BIC</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>(2,1,2)<a href="168">1,1,1</a></td>
+          <td>45505.50</td>
+          <td>45543.49</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>(1,1,2)<a href="168">1,1,1</a></td>
+          <td>45508.04</td>
+          <td>45539.70</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>(2,1,1)<a href="168">1,1,1</a></td>
+          <td>45518.42</td>
+          <td>45550.07</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>(1,1,1)<a href="168">1,1,1</a></td>
+          <td>45605.92</td>
+          <td>45631.24</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>(0,1,2)<a href="168">1,1,1</a></td>
+          <td>45606.81</td>
+          <td>45632.13</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      <strong>Selected</strong>: SARIMA(2,1,2)<a href="168">1,1,1</a> was
+      selected as it provides a good balance between model fit and parsimony.
+      This configuration was applied uniformly across all countries since
+      performing a full grid search for each country was computationally
+      expensive, and the ARMA/ARIMA orders were found to be similar across
+      datasets. Therefore, any performance loss from not individually optimizing
+      each country’s parameters is expected to be minimal..
+    </p>
+    <h4 id="spain-es--france-fr---arima-grid-search-results">
+      Spain (ES) &amp; France (FR) - ARIMA Grid Search Results
+    </h4>
+    <p>
+      <strong>All Countries</strong>: ARIMA(2,1,2) was selected based on lowest
+      AIC/BIC across all grid searches.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>Model</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>DK</strong></td>
+          <td>ARIMA(2,1,2)</td>
+        </tr>
+        <tr>
+          <td><strong>ES</strong></td>
+          <td>ARIMA(2,1,2)</td>
+        </tr>
+        <tr>
+          <td><strong>FR</strong></td>
+          <td>ARIMA(2,1,2)</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="24-final-order-selection-summary">
+      2.4 Final Order Selection Summary
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>DK</th>
+          <th>ES</th>
+          <th>FR</th>
+          <th>Justification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>ARMA</strong></td>
+          <td>(2,2)</td>
+          <td>(2,2)</td>
+          <td>(2,2)</td>
+          <td>Sufficient for stationary components</td>
+        </tr>
+        <tr>
+          <td><strong>ARIMA</strong></td>
+          <td>(2,1,2)</td>
+          <td>(2,1,2)</td>
+          <td>(2,1,2)</td>
+          <td>d=1 for trend removal, balanced AR/MA</td>
+        </tr>
+        <tr>
+          <td><strong>SARIMA</strong></td>
+          <td>(2,1,2)<a href="168">1,1,1</a></td>
+          <td>(2,1,2)<a href="168">1,1,1</a></td>
+          <td>(2,1,2)<a href="168">1,1,1</a></td>
+          <td>s=168 from ACF spike, P=D=Q=1 for seasonal components</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr />
+    <h2 id="3-forecasting-results-dev--test-performance">
+      3. Forecasting Results: Dev &amp; Test Performance
+    </h2>
+    <h3 id="31-classical-models">3.1 Classical Models</h3>
+    <h4 id="311-sarima">3.1.1 SARIMA</h4>
+    <p>
+      SARIMA models were trained using
+      <strong>GPU-accelerated cuML/RAPIDS</strong> for faster computation on the
+      RTX 3060.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>Split</th>
+          <th>MASE</th>
+          <th>sMAPE (%)</th>
+          <th>RMSE</th>
+          <th>80% PI Coverage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>DK</strong></td>
+          <td>Dev</td>
+          <td>1.528</td>
+          <td>9.89</td>
+          <td>377.46</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>DK</strong></td>
+          <td>Test</td>
+          <td>1.608</td>
+          <td>11.63</td>
+          <td>414.34</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>ES</strong></td>
+          <td>Dev</td>
+          <td>1.287</td>
+          <td>8.85</td>
+          <td>2930.38</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>ES</strong></td>
+          <td>Test</td>
+          <td>1.359</td>
+          <td>8.17</td>
+          <td>2468.72</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>FR</strong></td>
+          <td>Dev</td>
+          <td>1.145</td>
+          <td>6.77</td>
+          <td>4536.48</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td><strong>FR</strong></td>
+          <td>Test</td>
+          <td>2.231</td>
+          <td>8.53</td>
+          <td>28756.90</td>
+          <td>-</td>
+        </tr>
+      </tbody>
+    </table>
+    <h4 id="key-observations">Key Observations</h4>
+    <p>
+      -Very high MASE scores across all countries indicate that SARIMA struggled
+      to capture the complex patterns in the data, especially for France where
+      test MASE exceeded 2.0 also partly because of custom sarima implementation
+      using cuML.
+    </p>
+    <h3 id="312-arima">3.1.2 ARIMA</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>Split</th>
+          <th>MASE</th>
+          <th>sMAPE (%)</th>
+          <th>RMSE</th>
+          <th>80% PI Coverage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>DK</strong></td>
+          <td>Dev</td>
+          <td>4.371</td>
+          <td>27.50</td>
+          <td>1213.36</td>
+          <td>0.788</td>
+        </tr>
+        <tr>
+          <td><strong>DK</strong></td>
+          <td>Test</td>
+          <td>4.285</td>
+          <td>25.31</td>
+          <td>1037.28</td>
+          <td>0.844</td>
+        </tr>
+        <tr>
+          <td><strong>FR</strong></td>
+          <td>Dev</td>
+          <td>1.715</td>
+          <td>10.06</td>
+          <td>7739.22</td>
+          <td>0.829</td>
+        </tr>
+        <tr>
+          <td><strong>FR</strong></td>
+          <td>Test</td>
+          <td>2.075</td>
+          <td>11.77</td>
+          <td>6536.86</td>
+          <td>0.905</td>
+        </tr>
+        <tr>
+          <td><strong>ES</strong></td>
+          <td>Dev</td>
+          <td>1.649</td>
+          <td>10.34</td>
+          <td>3602.21</td>
+          <td>0.876</td>
+        </tr>
+        <tr>
+          <td><strong>ES</strong></td>
+          <td>Test</td>
+          <td>1.657</td>
+          <td>9.25</td>
+          <td>3020.80</td>
+          <td>0.940</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="313-arma">3.1.3 ARMA</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>Split</th>
+          <th>MASE</th>
+          <th>sMAPE (%)</th>
+          <th>RMSE</th>
+          <th>80% PI Coverage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>DK</strong></td>
+          <td>Dev</td>
+          <td>4.062</td>
+          <td>25.20</td>
+          <td>1145.44</td>
+          <td>0.262</td>
+        </tr>
+        <tr>
+          <td><strong>DK</strong></td>
+          <td>Test</td>
+          <td>4.088</td>
+          <td>23.91</td>
+          <td>998.51</td>
+          <td>0.271</td>
+        </tr>
+        <tr>
+          <td><strong>FR</strong></td>
+          <td>Dev</td>
+          <td>2.075</td>
+          <td>12.28</td>
+          <td>7636.51</td>
+          <td>0.253</td>
+        </tr>
+        <tr>
+          <td><strong>FR</strong></td>
+          <td>Test</td>
+          <td>2.275</td>
+          <td>12.98</td>
+          <td>6940.45</td>
+          <td>0.315</td>
+        </tr>
+        <tr>
+          <td><strong>ES</strong></td>
+          <td>Dev</td>
+          <td>2.916</td>
+          <td>19.19</td>
+          <td>6340.40</td>
+          <td>0.200</td>
+        </tr>
+        <tr>
+          <td><strong>ES</strong></td>
+          <td>Test</td>
+          <td>2.975</td>
+          <td>17.43</td>
+          <td>5367.72</td>
+          <td>0.242</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="32-neural-network-models">3.2 Neural Network Models</h3>
+    <p>
+      <strong>Configuration</strong>: Input window = 168 hours, Forecast horizon
+      = 24 hours (direct multi-output), Epochs = 30, Batch size = 128, Learning
+      rate = 1e-3
+    </p>
+    <p><strong>Mandatory Models Implemented</strong>:</p>
+    <ul>
+      <li>✅ <strong>GRU</strong>: Direct multi-horizon (168h → 24 steps)</li>
+      <li>✅ <strong>LSTM</strong>: Direct multi-horizon (168h → 24 steps)</li>
+    </ul>
+    <p><strong>Additional Models</strong>:</p>
+    <ul>
+      <li>ANN (Feedforward), RNN (Vanilla), BiLSTM (Bidirectional)</li>
+      <li>
+        <strong>LSTM Encoder-Decoder with Attention</strong> (Optional
+        requirement implemented)
+      </li>
+    </ul>
+    <h4 id="denmark-dk---neural-network-performance">
+      Denmark (DK) - Neural Network Performance
+    </h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Dev MASE</th>
+          <th>Dev sMAPE</th>
+          <th>Test MASE</th>
+          <th>Test sMAPE</th>
+          <th>Parameters</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ANN</td>
+          <td>0.853</td>
+          <td>5.46</td>
+          <td>0.881</td>
+          <td>6.51</td>
+          <td>~50K</td>
+        </tr>
+        <tr>
+          <td>RNN</td>
+          <td>0.832</td>
+          <td>5.12</td>
+          <td>0.834</td>
+          <td>5.66</td>
+          <td>~80K</td>
+        </tr>
+        <tr>
+          <td>GRU</td>
+          <td>0.811</td>
+          <td>4.99</td>
+          <td>0.810</td>
+          <td>5.50</td>
+          <td>~95K</td>
+        </tr>
+        <tr>
+          <td><strong>LSTM</strong></td>
+          <td><strong>0.805</strong></td>
+          <td><strong>4.92</strong></td>
+          <td><strong>0.806</strong></td>
+          <td><strong>5.47</strong></td>
+          <td>~95K</td>
+        </tr>
+        <tr>
+          <td>BiLSTM</td>
+          <td>0.797</td>
+          <td>4.88</td>
+          <td>0.804</td>
+          <td>5.44</td>
+          <td>~120K</td>
+        </tr>
+        <tr>
+          <td><strong>LSTM_ATTN</strong></td>
+          <td><strong>0.715</strong></td>
+          <td><strong>4.21</strong></td>
+          <td><strong>0.719</strong></td>
+          <td><strong>4.98</strong></td>
+          <td>126K</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      <strong>Best Model</strong>: LSTM_Encoder_Decoder_Attention achieved
+      <strong>MASE = 0.719</strong> on test set, outperforming standard LSTM by
+      10.8%.
+    </p>
+    <h4 id="spain-es---neural-network-performance">
+      Spain (ES) - Neural Network Performance
+    </h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Dev MASE</th>
+          <th>Dev sMAPE</th>
+          <th>Test MASE</th>
+          <th>Test sMAPE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ANN</td>
+          <td>1.067</td>
+          <td>5.78</td>
+          <td>1.112</td>
+          <td>6.45</td>
+        </tr>
+        <tr>
+          <td>RNN</td>
+          <td>1.043</td>
+          <td>5.52</td>
+          <td>1.089</td>
+          <td>6.21</td>
+        </tr>
+        <tr>
+          <td>GRU</td>
+          <td>1.021</td>
+          <td>5.39</td>
+          <td>1.065</td>
+          <td>6.08</td>
+        </tr>
+        <tr>
+          <td>LSTM</td>
+          <td>1.019</td>
+          <td>5.37</td>
+          <td>1.063</td>
+          <td>6.06</td>
+        </tr>
+        <tr>
+          <td>BiLSTM</td>
+          <td>1.012</td>
+          <td>5.34</td>
+          <td>1.058</td>
+          <td>6.03</td>
+        </tr>
+        <tr>
+          <td><strong>LSTM_ATTN</strong></td>
+          <td><strong>0.943</strong></td>
+          <td><strong>4.87</strong></td>
+          <td><strong>0.987</strong></td>
+          <td><strong>5.52</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      <strong>Best Model</strong>: LSTM_Encoder_Decoder_Attention achieved
+      <strong>MASE = 0.987</strong> on test set, outperforming standard LSTM by
+      7.1%.
+    </p>
+    <h4 id="france-fr---neural-network-performance">
+      France (FR) - Neural Network Performance
+    </h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Dev MASE</th>
+          <th>Dev sMAPE</th>
+          <th>Test MASE</th>
+          <th>Test sMAPE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ANN</td>
+          <td>0.923</td>
+          <td>4.12</td>
+          <td>0.967</td>
+          <td>4.98</td>
+        </tr>
+        <tr>
+          <td>RNN</td>
+          <td>0.898</td>
+          <td>3.89</td>
+          <td>0.945</td>
+          <td>4.76</td>
+        </tr>
+        <tr>
+          <td>GRU</td>
+          <td>0.887</td>
+          <td>3.78</td>
+          <td>0.932</td>
+          <td>4.65</td>
+        </tr>
+        <tr>
+          <td>LSTM</td>
+          <td>0.885</td>
+          <td>3.76</td>
+          <td>0.930</td>
+          <td>4.63</td>
+        </tr>
+        <tr>
+          <td>BiLSTM</td>
+          <td>0.881</td>
+          <td>3.74</td>
+          <td>0.927</td>
+          <td>4.61</td>
+        </tr>
+        <tr>
+          <td><strong>LSTM_ATTN</strong></td>
+          <td><strong>0.812</strong></td>
+          <td><strong>3.32</strong></td>
+          <td><strong>0.856</strong></td>
+          <td><strong>4.12</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      <strong>Best Model</strong>: LSTM_Encoder_Decoder_Attention achieved
+      <strong>MASE = 0.856</strong> on test set, outperforming standard LSTM by
+      7.9%.
+    </p>
+    <h3 id="33-model-comparison-summary">3.3 Model Comparison Summary</h3>
+    <p><strong>Best Performers by Country</strong>:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>Classical (Best)</th>
+          <th>Neural (Best)</th>
+          <th>Neural Winner</th>
+          <th>Improvement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>DK</strong></td>
+          <td>MASE = 1.608</td>
+          <td><strong>LSTM_ATTN = 0.719</strong></td>
+          <td>55% better</td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td><strong>ES</strong></td>
+          <td>MASE = 1.359</td>
+          <td><strong>LSTM_ATTN = 0.987</strong></td>
+          <td>27% better</td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td><strong>FR</strong></td>
+          <td>MASE = 2.231</td>
+          <td><strong>LSTM_ATTN = 0.856</strong></td>
+          <td>62% better</td>
+          <td>✅</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><strong>Key Findings</strong>:</p>
+    <ol>
+      <li>
+        <strong>Neural dominance</strong>: All neural models outperformed SARIMA
+        across all countries
+      </li>
+      <li>
+        <strong>Attention mechanism value</strong>: LSTM with attention
+        consistently achieved best results, showing 10-15% improvement over
+        standard LSTM
+      </li>
+      <li>
+        <strong>Architecture progression</strong>: ANN &lt; RNN &lt; GRU ≈ LSTM
+        &lt; BiLSTM &lt; <strong>LSTM_ATTN</strong> (clear hierarchy)
+      </li>
+    </ol>
+    <hr />
+    <h2 id="4-anomaly-detection-ensemble-forecasting-approach">
+      4. Anomaly Detection: Ensemble Forecasting Approach
+    </h2>
+    <h3 id="41-methodology">4.1 Methodology</h3>
+    <p>
+      <strong>Approach</strong>: Ensemble forecasting with statistical bounds
+    </p>
+    <ul>
+      <li>
+        Combine predictions from multiple models (ARIMA, SARIMA, neural
+        networks)
+      </li>
+      <li>Compute ensemble mean (ŷ) and prediction intervals (lo, hi)</li>
+      <li>
+        Calculate <strong>z-scores</strong> from residuals: z = (y - ŷ) / σ
+      </li>
+      <li>Flag anomalies when |z| &gt; threshold (typically 3.0)</li>
+    </ul>
+    <p>
+      <strong>Validation</strong>: CUSUM (Cumulative Sum) drift detection for
+      persistent deviations
+    </p>
+    <h3 id="42-top-10-anomalies-by-z-score">4.2 Top-10 Anomalies by Z-Score</h3>
+    <h4 id="denmark-dk---highest-magnitude-anomalies">
+      Denmark (DK) - Highest Magnitude Anomalies
+    </h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Actual Load</th>
+          <th>Predicted</th>
+          <th>Z-Score</th>
+          <th>Flagged</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2020-09-16 09:00</td>
+          <td>4015.23</td>
+          <td>4561.96</td>
+          <td><strong>-7.01</strong></td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td>2020-05-21 05:00</td>
+          <td>3228.70</td>
+          <td>3916.09</td>
+          <td><strong>-6.42</strong></td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td>2020-05-21 06:00</td>
+          <td>3508.83</td>
+          <td>4187.57</td>
+          <td><strong>-5.99</strong></td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td>2020-05-21 07:00</td>
+          <td>3656.83</td>
+          <td>4275.90</td>
+          <td><strong>-5.23</strong></td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td>2020-04-09 05:00</td>
+          <td>3215.35</td>
+          <td>3783.75</td>
+          <td><strong>-5.10</strong></td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td>2020-05-21 08:00</td>
+          <td>3701.35</td>
+          <td>4317.13</td>
+          <td><strong>-5.00</strong></td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td>2020-07-26 12:00</td>
+          <td>3783.39</td>
+          <td>3387.21</td>
+          <td><strong>+4.96</strong></td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td>2020-08-10 05:00</td>
+          <td>4182.25</td>
+          <td>3737.25</td>
+          <td><strong>+4.88</strong></td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td>2020-05-21 04:00</td>
+          <td>2955.67</td>
+          <td>3434.41</td>
+          <td><strong>-4.88</strong></td>
+          <td>✅</td>
+        </tr>
+        <tr>
+          <td>2020-04-09 06:00</td>
+          <td>3447.09</td>
+          <td>4009.56</td>
+          <td><strong>-4.86</strong></td>
+          <td>✅</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><strong>Anomaly Patterns</strong>:</p>
+    <ul>
+      <li>
+        <strong>Negative anomalies (under-consumption)</strong>: May 21, 2020
+        shows consecutive hours (04:00-08:00) suggesting grid event or holiday
+        effect
+      </li>
+      <li>
+        <strong>Positive anomalies (over-consumption)</strong>: Summer peaks
+        (July-August) indicate unexpected demand surges
+      </li>
+      <li>
+        <strong>Magnitude</strong>: Deviations range from 400-700 MW (10-20% of
+        typical load)
+      </li>
+    </ul>
+    <h3 id="43-example-anomaly-plots">4.3 Example Anomaly Plots</h3>
+    <h4 id="plot-1-full-time-series-overview-with-anomaly-detection">
+      Plot 1: Full Time Series Overview with Anomaly Detection
+    </h4>
+    <p>
+      <img
+        src="outputs/plots/anomalies/DK_anomaly_overview.png"
+        alt="Denmark Anomaly Overview"
+      />
+    </p>
+    <p><strong>Notes</strong>:</p>
+    <ul>
+      <li>
+        <strong>Top Panel</strong>: Shows actual load (blue) vs predicted load
+        (green) over the entire test period (5,040 hours)
+      </li>
+      <li>
+        <strong>Prediction Intervals</strong>: Green shaded region represents
+        80% confidence bounds
+      </li>
+      <li>
+        <strong>Red Markers</strong>: Indicate 63 flagged anomalies where
+        z-score exceeded ±3σ threshold
+      </li>
+      <li>
+        <strong>Clustering</strong>: Notice anomalies cluster in April-May 2020
+        (COVID-19 lockdown period) and summer 2020 (heat waves)
+      </li>
+      <li>
+        <strong>Pattern</strong>: Most anomalies are negative
+        (under-consumption), suggesting unexpected demand drops
+      </li>
+    </ul>
+    <p><strong>Bottom Panel</strong>: Z-score evolution over time</p>
+    <ul>
+      <li>
+        <strong>Orange lines</strong>: ±3σ threshold (standard anomaly
+        detection)
+      </li>
+      <li><strong>Red lines</strong>: ±5σ threshold (extreme events only)</li>
+      <li>
+        <strong>Observation</strong>: Several violations exceed ±5σ, indicating
+        truly exceptional events (e.g., z=-7.12 on Sept 16)
+      </li>
+    </ul>
+    <h4 id="plot-2-detailed-view-of-largest-anomaly-event">
+      Plot 2: Detailed View of Largest Anomaly Event
+    </h4>
+    <p>
+      <img
+        src="outputs/plots/anomalies/DK_anomaly_detail_biggest.png"
+        alt="Denmark Biggest Anomaly Detail"
+      />
+    </p>
+    <p><strong>Event Details</strong>:</p>
+    <ul>
+      <li><strong>Date/Time</strong>: 2020-09-16 09:00 (Wednesday morning)</li>
+      <li>
+        <strong>Z-Score</strong>: -7.12 (highest magnitude across all detected
+        anomalies)
+      </li>
+      <li><strong>Actual Load</strong>: 4,015 MW</li>
+      <li><strong>Predicted Load</strong>: 4,562 MW</li>
+      <li><strong>Deviation</strong>: -547 MW (12% under-forecast)</li>
+    </ul>
+    <p><strong>Notes</strong>:</p>
+    <ul>
+      <li>
+        <strong>Top Panel</strong>: ±3 day window around the event shows context
+        <ul>
+          <li>Yellow annotation box highlights exact anomaly metrics</li>
+          <li>Red star marks the anomaly point</li>
+          <li>
+            Prediction interval (green shaded) did NOT contain the actual value
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Bottom Panel</strong>: Dual-axis plot
+        <ul>
+          <li>
+            <strong>Blue bars</strong>: Residuals (actual - predicted) in MW
+          </li>
+          <li><strong>Red line</strong>: Z-scores showing severity</li>
+          <li>
+            Notice the spike in residual magnitude and z-score at the anomaly
+            timestamp
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Possible Causes</strong>:
+        <ul>
+          <li>
+            <strong>Grid maintenance</strong>: Unexpected outage reducing demand
+          </li>
+          <li>
+            <strong>Data quality issue</strong>: Measurement error or
+            transmission failure
+          </li>
+          <li>
+            <strong>Unusual weather</strong>: Mild temperatures reducing
+            heating/cooling needs
+          </li>
+          <li>
+            <strong>Industrial shutdown</strong>: Large factory offline (Denmark
+            has high industrial load share)
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p>
+      <strong>Additional Example</strong>: Spain and France plots also available
+      in <code>outputs/plots/anomalies/</code>
+    </p>
+    <ul>
+      <li>
+        <strong>Spain</strong>: Largest anomaly on 2020-03-22 07:00 (z=-5.39) -
+        likely COVID-19 lockdown impact
+      </li>
+      <li>
+        <strong>France</strong>: Largest anomaly on 2020-07-07 17:00 (z=+18.07)
+        - extreme over-consumption during heatwave
+      </li>
+    </ul>
+    <h3 id="44-anomaly-statistics-summary">4.4 Anomaly Statistics Summary</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>Total Points</th>
+          <th>Flagged Anomalies</th>
+          <th>Anomaly Rate</th>
+          <th>Avg</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>DK</strong></td>
+          <td>5,040</td>
+          <td>63</td>
+          <td>1.25%</td>
+          <td>4.23</td>
+        </tr>
+        <tr>
+          <td><strong>ES</strong></td>
+          <td>5,040</td>
+          <td>71</td>
+          <td>1.41%</td>
+          <td>3.89</td>
+        </tr>
+        <tr>
+          <td><strong>FR</strong></td>
+          <td>5,040</td>
+          <td>51</td>
+          <td>1.01%</td>
+          <td>4.15</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      <strong>Interpretation</strong>: Denmark and Spain show higher anomaly
+      rates, consistent with their higher forecasting difficulty (MASE scores).
+      France's lower rate aligns with its more predictable consumption patterns.
+    </p>
+    <hr />
+    <h2 id="5-machine-learning-based-anomaly-classification">
+      5. Machine Learning-Based Anomaly Classification
+    </h2>
+    <h3 id="51-approach">5.1 Approach</h3>
+    <p>
+      <strong>Model</strong>: LightGBM classifier<br />
+      <strong>Features</strong>:
+    </p>
+    <ul>
+      <li>Statistical features (z-scores, residuals, rolling statistics)</li>
+      <li>Temporal features (hour, day of week, month)</li>
+      <li>Forecast uncertainty (prediction interval width)</li>
+    </ul>
+    <p>
+      <strong>Training</strong>: Silver-labeled anomalies (from ensemble
+      detection) → Verified labels (manual validation)<br />
+      <strong>Evaluation Metrics</strong>:
+    </p>
+    <ul>
+      <li>
+        <strong>PR-AUC</strong> (Precision-Recall Area Under Curve): Handles
+        class imbalance
+      </li>
+      <li>
+        <strong>F1@P=0.80</strong>: F1-score at precision threshold of 0.80
+      </li>
+    </ul>
+    <h3 id="52-results-by-country">5.2 Results by Country</h3>
+    <h4 id="denmark-dk---ensemble-approach">
+      Denmark (DK) - Ensemble Approach
+    </h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Score</th>
+          <th>Interpretation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>PR-AUC</strong></td>
+          <td>0.342</td>
+          <td>Moderate discriminative ability</td>
+        </tr>
+        <tr>
+          <td><strong>F1@P=0.80</strong></td>
+          <td>0.200</td>
+          <td>Low recall at high precision</td>
+        </tr>
+        <tr>
+          <td>Best Threshold</td>
+          <td>0.837</td>
+          <td>Conservative classification</td>
+        </tr>
+        <tr>
+          <td>Precision</td>
+          <td>1.000</td>
+          <td>No false positives (at best threshold)</td>
+        </tr>
+        <tr>
+          <td>F1-Score</td>
+          <td>0.200</td>
+          <td>Imbalanced trade-off</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      <strong>Analysis</strong>: Denmark's ML classifier struggles with recall,
+      likely due to diverse anomaly patterns that don't fit statistical mold.
+      High precision suggests it catches obvious cases but misses subtle
+      anomalies.
+    </p>
+    <h4 id="spain-es---ensemble-approach">Spain (ES) - Ensemble Approach</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Score</th>
+          <th>Interpretation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>PR-AUC</strong></td>
+          <td><strong>0.657</strong></td>
+          <td><strong>Good</strong> discriminative performance</td>
+        </tr>
+        <tr>
+          <td><strong>F1@P=0.80</strong></td>
+          <td><strong>0.704</strong></td>
+          <td><strong>Strong</strong> balanced performance</td>
+        </tr>
+        <tr>
+          <td>Best Threshold</td>
+          <td>0.243</td>
+          <td>Moderate sensitivity</td>
+        </tr>
+        <tr>
+          <td>Precision</td>
+          <td>0.864</td>
+          <td>High accuracy on flagged anomalies</td>
+        </tr>
+        <tr>
+          <td>F1-Score</td>
+          <td>0.704</td>
+          <td>Well-balanced precision/recall</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      <strong>Analysis</strong>: Spain achieves the best ML performance,
+      indicating that its anomalies have distinct, learnable characteristics.
+      The ensemble approach effectively captures ES-specific patterns.
+    </p>
+    <h4 id="france-fr---sarima-based-approach">
+      France (FR) - SARIMA-Based Approach
+    </h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Score</th>
+          <th>Interpretation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>PR-AUC</strong></td>
+          <td>0.442</td>
+          <td>Moderate-to-good performance</td>
+        </tr>
+        <tr>
+          <td><strong>F1@P=0.80</strong></td>
+          <td>0.000</td>
+          <td>Poor high-precision recall</td>
+        </tr>
+        <tr>
+          <td>Best Threshold</td>
+          <td>0.500</td>
+          <td>Default neutral threshold</td>
+        </tr>
+        <tr>
+          <td>Precision</td>
+          <td>0.444</td>
+          <td>Moderate accuracy</td>
+        </tr>
+        <tr>
+          <td>F1-Score</td>
+          <td>0.552</td>
+          <td>Imbalanced but reasonable</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      <strong>Analysis</strong>: France's SARIMA-based detection outperforms
+      ensemble for this country (PR-AUC 0.442 vs 0.191 for ensemble). This
+      suggests that simpler statistical models capture FR anomalies better than
+      complex ensembles.
+    </p>
+    <h3 id="53-feature-importance-top-5-across-countries">
+      5.3 Feature Importance (Top-5 across countries)
+    </h3>
+    <p><strong>Common Important Features</strong>:</p>
+    <ol>
+      <li>
+        <strong>Z-score magnitude</strong> (residual/std): Primary discriminator
+      </li>
+      <li><strong>Prediction interval width</strong>: Uncertainty signal</li>
+      <li>
+        <strong>Hour of day</strong>: Temporal context for normal patterns
+      </li>
+      <li>
+        <strong>Rolling mean deviation</strong>: Persistent drift indicator
+      </li>
+      <li>
+        <strong>Day of week</strong>: Weekend vs. weekday anomaly likelihood
+      </li>
+    </ol>
+    <p>
+      <strong>Insight</strong>: Statistical features dominate, confirming that
+      anomalies are primarily outliers in distribution rather than complex
+      temporal patterns.
+    </p>
+    <hr />
+    <h2 id="6-live-adaptation-online-learning-simulation">
+      6. Live Adaptation: Online Learning Simulation
+    </h2>
+    <h3 id="61-strategy">6.1 Strategy</h3>
+    <p>
+      <strong>Objective</strong>: Simulate real-time forecasting with model
+      updates as new data arrives.
+    </p>
+    <p><strong>Approach</strong>:</p>
+    <ul>
+      <li>
+        <strong>Initial Model</strong>: LSTM with attention trained on
+        historical data (80% split)
+      </li>
+      <li>
+        <strong>Online Updates</strong>: Retrain on expanding window every 7
+        days
+      </li>
+      <li>
+        <strong>Evaluation</strong>: Rolling 7-day MASE and 80% prediction
+        interval coverage
+      </li>
+    </ul>
+    <p><strong>Why LSTM with attention?</strong></p>
+    <ul>
+      <li>Best performance (vs. SARIMA grid search)</li>
+      <li>Handles non-stationary patterns</li>
+      <li>GPU acceleration for online updates</li>
+    </ul>
+    <h3 id="62-beforeafter-comparison-baseline-vs-adaptive-performance">
+      6.2 Before/After Comparison: Baseline vs. Adaptive Performance
+    </h3>
+    <p>
+      The following table compares the <strong>baseline</strong> static LSTM
+      model (trained once, no updates) versus the <strong>adaptive</strong> LSTM
+      with online retraining (updated periodically during simulation). Metrics
+      are computed over the simulation period using rolling 7-day windows:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>Metric</th>
+          <th>Baseline (Static)</th>
+          <th>Adaptive (Online)</th>
+          <th>Improvement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>DK</strong></td>
+          <td>Rolling 7d MASE</td>
+          <td>2.698</td>
+          <td>1.487</td>
+          <td><strong>+44.9%</strong></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>80% PI Coverage</td>
+          <td>77.5%</td>
+          <td>73.3%</td>
+          <td>-4.2pp</td>
+        </tr>
+        <tr>
+          <td><strong>ES</strong></td>
+          <td>Rolling 7d MASE</td>
+          <td>2.550</td>
+          <td>2.153</td>
+          <td><strong>+15.6%</strong></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>80% PI Coverage</td>
+          <td>76.1%</td>
+          <td>59.7%</td>
+          <td>-16.5pp</td>
+        </tr>
+        <tr>
+          <td><strong>FR</strong></td>
+          <td>Rolling 7d MASE</td>
+          <td>3.230</td>
+          <td>2.274</td>
+          <td><strong>+29.6%</strong></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>80% PI Coverage</td>
+          <td>74.2%</td>
+          <td>74.5%</td>
+          <td>+0.3pp</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><strong>Observations</strong>:</p>
+    <ul>
+      <li>
+        <strong>Significant MASE improvements</strong>: Online adaptation
+        reduced forecast errors substantially across all countries (15-45%
+        improvement)
+      </li>
+      <li>
+        <strong>Denmark (DK)</strong> showed the largest gain (+44.9%),
+        suggesting high model sensitivity to recent data
+      </li>
+      <li>
+        <strong>France (FR)</strong> achieved +29.6% improvement with stable
+        coverage (+0.3pp), indicating well-balanced adaptation
+      </li>
+      <li>
+        <strong>Spain (ES)</strong> had moderate gains (+15.6%) but suffered
+        coverage degradation (-16.5pp), suggesting overfitting to recent
+        patterns
+      </li>
+      <li>
+        <strong>Coverage trade-offs</strong>: Adaptive models prioritize
+        accuracy (MASE) over uncertainty calibration, leading to narrower
+        prediction intervals in DK/ES
+      </li>
+    </ul>
+    <p>
+      <strong>Key Takeaway</strong>: Online learning significantly improves
+      point forecast accuracy (MASE) but may compromise prediction interval
+      calibration. The strategy is most effective for DK and FR, where
+      adaptation preserves or improves coverage while reducing errors
+    </p>
+    <h3 id="63-adaptive-benefits">6.3 Adaptive Benefits</h3>
+    <p><strong>Advantages of Online Learning</strong>:</p>
+    <ul>
+      <li>
+        Captures recent regime shifts (e.g., pandemic effects, seasonal
+        transitions)
+      </li>
+      <li>Reduces model staleness vs. static deployment</li>
+      <li>Enables continuous monitoring with evolving baselines</li>
+    </ul>
+    <p><strong>Challenges</strong>:</p>
+    <ul>
+      <li>
+        Computational cost: Weekly retraining on GPU (acceptable for 24h
+        horizon)
+      </li>
+      <li>
+        Catastrophic forgetting: Expanding window mitigates, but long-term
+        memory may degrade
+      </li>
+      <li>
+        Concept drift detection: CUSUM monitors drifts, but threshold tuning
+        needed
+      </li>
+    </ul>
+    <hr />
+    <h2 id="7-limitations--future-work">7. Limitations &amp; Future Work</h2>
+    <h3 id="71-current-limitations">7.1 Current Limitations</h3>
+    <ol>
+      <li>
+        <p><strong>Exogenous Feature Dependence</strong>:</p>
+        <ul>
+          <li>
+            Models require future solar/wind forecasts for production deployment
+          </li>
+          <li>
+            Solar/wind forecasts themselves carry uncertainty that propagates
+            into load predictions
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Seasonal Period Assumption (s=168)</strong>:</p>
+        <ul>
+          <li>
+            Fixed weekly seasonality may miss bi-weekly or monthly patterns
+            (e.g., payroll cycles, holidays)
+          </li>
+          <li>
+            Multi-seasonal SARIMA (e.g., SARIMA with s=[24, 168]) could improve
+            but increases complexity
+          </li>
+          <li>
+            <strong>Evidence</strong>: ACF showed dominant 168-hour spike, but
+            minor peaks at multiples of 24h were visible
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Anomaly Ground Truth Quality</strong>:</p>
+        <ul>
+          <li>
+            Silver labels from ensemble detection introduce noise into ML
+            classifier training
+          </li>
+          <li>Manual verification is resource-intensive and subjective</li>
+          <li>
+            <strong>Impact</strong>: DK's low ML F1@P=0.80 (0.20) may stem from
+            label quality issues
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Online Learning Computational Cost</strong>:</p>
+        <ul>
+          <li>
+            Weekly LSTM retraining on GPU is manageable but may not scale to
+            real-time (hourly) updates
+          </li>
+          <li>Incremental learning (e.g., partial fits) not implemented</li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>Generalization to Other Countries</strong>:</p>
+        <ul>
+          <li>
+            Models tuned for DK/ES/FR may not transfer to different grid
+            structures (e.g., isolated vs. interconnected grids)
+          </li>
+          <li>Hyperparameters (s=168, input_window=168) are Europe-centric</li>
+        </ul>
+      </li>
+    </ol>
+    <hr />
+    <h2 id="technical-appendix">Technical Appendix</h2>
+    <h3 id="model-architectures">Model Architectures</h3>
+    <p><strong>LSTM Encoder-Decoder with Attention</strong>:</p>
+    <ul>
+      <li>
+        <strong>Encoder</strong>: LSTM(input_size=3, hidden_size=128,
+        num_layers=2, dropout=0.2)
+      </li>
+      <li>
+        <strong>Attention</strong>: Bahdanau (additive) mechanism with learnable
+        alignment weights
+      </li>
+      <li>
+        <strong>Decoder</strong>: LSTM(input_size=hidden_size+1,
+        hidden_size=128, num_layers=2) with teacher forcing (ratio=0.5)
+      </li>
+      <li>
+        <strong>Output</strong>: Linear(128, 3) for quantile forecasting (10th,
+        50th, 90th percentiles)
+      </li>
+      <li><strong>Parameters</strong>: 126,082 trainable weights</li>
+    </ul>
+    <p><strong>Training Configuration</strong>:</p>
+    <ul>
+      <li>Optimizer: Adam(lr=1e-3)</li>
+      <li>Loss: Quantile loss (pinball loss)</li>
+      <li>Early stopping: Patience=5 epochs on dev MASE</li>
+      <li>GPU: NVIDIA RTX 3060 (batch size=128, ~45s/epoch for DK dataset)</li>
+    </ul>
+    <h3 id="data-preprocessing">Data Preprocessing</h3>
+    <ol>
+      <li>
+        <strong>Cleaning</strong>: Removed missing values, outliers beyond 5σ
+      </li>
+      <li>
+        <strong>Normalization</strong>: MinMaxScaler per country (fitted on
+        train split only)
+      </li>
+      <li>
+        <strong>Windowing</strong>: Sliding window (stride=24h) to create (X, y)
+        pairs
+      </li>
+      <li>
+        <strong>Exogenous alignment</strong>: Solar/Wind features synchronized
+        with load timestamps
+      </li>
+    </ol>
+    <h3 id="reproducibility">Reproducibility</h3>
+    <ul>
+      <li><strong>Seed</strong>: 42 (set in PyTorch, NumPy, random)</li>
+      <li>
+        <strong>Environment</strong>: Python 3.11.9, PyTorch 2.x, CUDA 11.8
+      </li>
+      <li>
+        <strong>Code</strong>: Available in <code>src/neural/</code>,
+        <code>src/classicmodels/</code>, <code>src/anomaly/</code>
+      </li>
+      <li>
+        <strong>Outputs</strong>: All metrics saved to
+        <code>outputs/metrics/</code>, plots to <code>outputs/plots/</code>
+      </li>
+    </ul>
+    <hr />
+    <h2 id="end-of-report"><strong>End of Report</strong></h2>
+  </body>
+</html>
